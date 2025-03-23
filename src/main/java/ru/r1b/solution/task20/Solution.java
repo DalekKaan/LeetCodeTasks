@@ -1,16 +1,15 @@
-package ru.r1b;
+package ru.r1b.solution.task20;
 
 import java.util.*;
 
-public class Main {
-    public static void main(String[] args) {
-        Main m = new Main();
-        System.out.println(m.isValid("(][)"));
-    }
+/**
+ * 20. Valid Parentheses
+ */
+public class Solution {
     public boolean isValid(String s) {
 
         Stack<Character> stack = new Stack<>();
-        for (char ch: s.toCharArray()) {
+        for (char ch : s.toCharArray()) {
 
             if (ch == '(' | ch == '[' || ch == '{') {
                 stack.push(ch);
@@ -24,11 +23,19 @@ public class Main {
                 char top = stack.pop();
                 char needle;
                 switch (top) {
-                    case '[': needle = ']'; break;
-                    case '(': needle = ')'; break;
-                    case '{': needle = '}'; break;
-                    default: return false;
-                };
+                    case '[':
+                        needle = ']';
+                        break;
+                    case '(':
+                        needle = ')';
+                        break;
+                    case '{':
+                        needle = '}';
+                        break;
+                    default:
+                        return false;
+                }
+                ;
                 if (ch != needle) {
                     return false;
                 }
@@ -42,7 +49,7 @@ public class Main {
     private boolean checkStack(String s, HashMap<Character, Character> pairs) {
 
         Stack<Character> stack = new Stack<>();
-        for (char ch: s.toCharArray()) {
+        for (char ch : s.toCharArray()) {
 
             if (ch == '(' | ch == '[' || ch == '{') {
                 stack.push(ch);

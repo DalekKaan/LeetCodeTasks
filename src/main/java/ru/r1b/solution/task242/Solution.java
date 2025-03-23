@@ -1,12 +1,12 @@
-package ru.r1b;
+package ru.r1b.solution.task242;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Anagram {
-    public static void main(String[] args) {
-        System.out.println(new Anagram().isAnagram("anagram", "nagaram"));
-    }
+/**
+ * 242. Valid Anagram
+ */
+public class Solution {
     public boolean isAnagram(String s, String t) {
         if (s.length() != t.length()) {
             return false;
