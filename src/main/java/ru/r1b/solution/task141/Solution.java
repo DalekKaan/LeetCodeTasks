@@ -4,7 +4,7 @@ package ru.r1b.solution.task141;
  * 141. Linked List Cycle
  */
 public class Solution {
-    private static int VAL_LIMIT = 100000;
+    private static final int VAL_LIMIT = 100000;
 
     public boolean hasCycle(ListNode head) {
         if (head == null) {
@@ -19,7 +19,6 @@ public class Solution {
             head = head.next;
             limit--;
         }
-        ;
         return false;
     }
 }
