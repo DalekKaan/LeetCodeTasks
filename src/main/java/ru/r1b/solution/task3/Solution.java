@@ -11,39 +11,25 @@ public class Solution {
         if (s.length() == 1) {
             return 1;
         }
-        int out = 1;
         char[] chars = s.toCharArray();
-        int i = 0, j = 1;
+
+        int out = 0, i = 0, j = 0;
         boolean[] counter = new boolean[256];
 
-        do {
-            char ci = chars[i];
-            char cj = chars[j];
-            counter[ci] = true;
+        while (j < chars.length) {
+            char ci = chars[i], cj = chars[j];
 
-            if (counter[cj]) {
-                out = Math.max(out, j - i);
-                for (int k = i; k < j; k++) {
-                    counter[chars[k]] = false;
-                }
+            if (!counter[cj]) {
+                counter[cj] = true;
+                out = Math.max(out, j - i + 1);
+                j++;
+            } else {
+                counter[ci] = false;
                 i++;
-                j = i + 1;
-                continue;
             }
-            counter[cj] = true;
-            j++;
+        }
 
-        } while (j < chars.length);
-
-        /*
-        data target
-
-        pwwkew
-
-        abcabcbb
-         */
-
-        return Math.max(out, j - i);
+        return out;
 
 
     }
