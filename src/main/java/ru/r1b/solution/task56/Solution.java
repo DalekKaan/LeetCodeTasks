@@ -21,10 +21,10 @@ public class Solution {
                     continue;
                 }
                 if (intersects(intervals[i], intervals[j])) {
-                    merge(intervals[i], intervals[j]);
-                    intervals[j] = null;
-                    j = 0;
+                    merge(intervals[j], intervals[i]);
+                    intervals[i] = null;
                     reduced++;
+                    break;
                 }
             }
         }
