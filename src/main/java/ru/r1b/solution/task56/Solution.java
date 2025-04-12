@@ -10,22 +10,14 @@ public class Solution {
         if (intervals.length <= 1) {
             return intervals;
         }
+        Arrays.sort(intervals, (i1,i2) -> Integer.compare(i1[0], i2[0]));
 
         int reduced = 0;
-        for (int i = 0; i < intervals.length; i++) {
-            if (intervals[i] == null) {
-                continue;
-            }
-            for (int j = 0; j < intervals.length; j++) {
-                if (intervals[j] == null || intervals[j] == intervals[i]) {
-                    continue;
-                }
-                if (intersects(intervals[i], intervals[j])) {
-                    merge(intervals[j], intervals[i]);
-                    intervals[i] = null;
-                    reduced++;
-                    break;
-                }
+        for (int i = 0; i < intervals.length-1; i++) {
+            if (intersects(intervals[i], intervals[i+1])) {
+                merge(intervals[i+1], intervals[i]);
+                intervals[i] = null;
+                reduced++;
             }
         }
 
