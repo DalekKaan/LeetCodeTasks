@@ -13,8 +13,7 @@ public class Solution {
             if (carry >= target) {
                 found = true;
                 min = Math.min(min, r - l + 1);
-                carry -= nums[l++];
-                carry -= nums[r];
+                carry -= nums[l++] + nums[r];
             } else {
                 r++;
             }
