@@ -6,29 +6,31 @@ import java.util.List;
 public class Solution {
     public List<Integer> findAnagrams(String s, String p) {
         var out = new LinkedList<Integer>();
-
-        for (int i = 0; i <= s.length() - p.length(); i++) {
-            if (isAnagram(s.substring(i, i + p.length()), p)) {
-                out.add(i);
-            }
-        }
-
-        return out;
-    }
-
-    private boolean isAnagram(String s, String p) {
+        char[] chars1 = s.toCharArray(), chars2 = p.toCharArray();
         int[] freq = new int[26];
 
-        for (int i = 0; i < s.length(); i++) {
-            freq[s.charAt(i) - 'a']++;
-            freq[p.charAt(i) - 'a']--;
+        int l = 0, r = chars2.length-1;
+        while (r < chars1.length) {
+            for (int i = l; i <= r; i++) {
+                freq[chars1[i] - 'a']++;
+                freq[chars2[i-l] - 'a']--;
+            }
+            boolean isAnagram = true;
+            for (int i = 0; i < freq.length; i++) {
+                int f = freq[i];
+                if (f > 0) {
+                    isAnagram = false;
+                }
+                freq[i] = 0;
+            }
+            if (isAnagram) {
+                out.add(l);
+            }
+            l++;
+            r++;
         }
 
-        for (int f : freq) {
-            if (f > 0) {
-                return false;
-            }
-        }
-        return true;
+
+        return out;
     }
 }
