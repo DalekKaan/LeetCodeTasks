@@ -17,7 +17,19 @@ public class Solution {
                 }
                 j++;
             }
-            out = Math.max(out, j - i);
+            if (replacements > 0 ) {
+                j = i;
+                while (j > 0 && (replacements > 0 || chars[j] == baseChar)) {
+                    j--;
+                    if (chars[j] != baseChar) {
+                        replacements--;
+                    }
+                }
+                out = Math.max(out, chars.length-j);
+            } else  {
+                out = Math.max(out, j - i);
+            }
+
 
         }
         return out;
