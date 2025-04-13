@@ -7,7 +7,7 @@ public class Solution {
         }
         int out = 0;
         char[] chars = s.toCharArray();
-        for (int i = 0; i < chars.length - k; i++) {
+        for (int i = 0; i < chars.length; i++) {
             char baseChar = chars[i];
 
             int replacements = k, j = i;
