@@ -1,5 +1,8 @@
 package ru.r1b.solution.task424;
 
+/**
+ * 424. Longest Repeating Character Replacement
+ */
 public class Solution {
     public int characterReplacement(String s, int k) {
         if (s.length() <= k) {
@@ -7,32 +10,36 @@ public class Solution {
         }
         int out = 0;
         char[] chars = s.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            char baseChar = chars[i];
+        char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
-            int replacements = k, j = i;
-            while (j < chars.length && (replacements > 0 || chars[j] == baseChar)) {
-                if (chars[j] != baseChar) {
-                    replacements--;
-                }
-                j++;
-            }
-            if (replacements > 0 ) {
-                j = i;
-                while (j > 0 && (replacements > 0 || chars[j] == baseChar)) {
-                    j--;
-                    if (chars[j] != baseChar) {
-                        replacements--;
+        for (char alpha : alphabet) {
+            out = Math.max(out, maxWindow(alpha, chars, k));
+        }
+
+        return out;
+    }
+
+    public int maxWindow(char alpha, char[] chars, int k) {
+        int l = 0, r = k, i = l, max = r - l;
+        while (r < chars.length) {
+            if (chars[i] == alpha) {
+                r++;
+            } else {
+                if (k <= 0) {
+                    while (chars[l] == alpha) {
+                        l++;
                     }
+                    l++;
+                    r++;
+                } else {
+                    k--;
                 }
-                out = Math.max(out, chars.length-j);
-            } else  {
-                out = Math.max(out, j - i);
             }
-
+            i++;
+            max = Math.max(max, r - l);
 
         }
-        return out;
+        return max;
     }
 
 }
