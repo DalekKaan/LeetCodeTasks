@@ -10,7 +10,7 @@ public class Solution {
         }
         int sum = 0, prev = -1;
         for (int n : nums) {
-            if (prev == 0 && n == 0) {
+            if (prev != -1 && (prev + n) % k == 0) {
                 return true;
             }
             sum += n;
