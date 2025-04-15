@@ -9,7 +9,12 @@ import java.util.Map;
 public class Solution {
 
     public int numberOfSubarrays(int[] nums, int k) {
-        int prefSum = 0;
+        int[] prefSum = new int[nums.length];
+        prefSum[0] = nums[0] & 1;
+        for (int i = 0; i < prefSum.length - 1; i++) {
+            prefSum[i + 1] = prefSum[i] + (nums[i + 1] & 1);
+        }
+
         Map<Integer, Integer> storage = new HashMap<>();
 
         storage.put(0, 1);
@@ -17,12 +22,11 @@ public class Solution {
         int out = 0;
 
         for (int i = 0; i < nums.length; i++) {
-            prefSum += nums[i] & 1;
 
-            if (storage.containsKey(prefSum - k)) {
-                out += storage.get(prefSum - k);
+            if (storage.containsKey(prefSum[i] - k)) {
+                out += storage.get(prefSum[i] - k);
             }
-            storage.merge(prefSum, 1, Integer::sum);
+            storage.merge(prefSum[i], 1, Integer::sum);
 
         }
         return out;
