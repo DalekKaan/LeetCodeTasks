@@ -12,7 +12,7 @@ public class Solution {
         int prefSum = 0;
         Map<Integer, Integer> storage = new HashMap<>();
 
-        storage.put(0, 0);
+        storage.put(0, 1);
 
         int out = 0;
 
