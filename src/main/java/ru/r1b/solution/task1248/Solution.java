@@ -17,8 +17,7 @@ public class Solution {
         int out = 0;
 
         for (int i = 0; i < nums.length; i++) {
-            int num = nums[i];
-            prefSum += num % 2;
+            prefSum += nums[i] & 1;
 
             if (storage.containsKey(prefSum - k)) {
                 out += storage.get(prefSum - k);
